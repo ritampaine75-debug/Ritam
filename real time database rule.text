@@ -1,0 +1,63 @@
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+
+    "settings": {
+      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
+    },
+
+    "banners": {
+      "$bannerId": {
+        ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
+      }
+    },
+
+    "courses": {
+      "$courseId": {
+        ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
+      }
+    },
+
+    "live_sessions": {
+      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
+    },
+
+    "users": {
+      "$userId": {
+        ".read": "auth.uid === $userId || root.child('users').child(auth.uid).child('isAdmin').val() === true",
+        ".write": "auth.uid === $userId || root.child('users').child(auth.uid).child('isAdmin').val() === true",
+
+        "isAdmin": {
+          ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
+        },
+
+        "isBanned": {
+          ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
+        }
+      }
+    },
+
+    "payments": {
+      "$paymentId": {
+        ".write": "auth != null"
+      }
+    },
+
+    "notifications": {
+      "$notificationId": {
+        ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
+      }
+    },
+
+    "sponsors": {
+      "$sponsorId": {
+        ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
+      }
+    },
+
+    "categories": {
+      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
+    }
+  }
+}
